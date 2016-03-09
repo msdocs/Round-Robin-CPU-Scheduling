@@ -5,6 +5,8 @@
 ###########################################################
 
 import queue,csv
+
+
 class Process: # Definining Process
     def __init__(self,id,a,b):
         self.id = id
@@ -35,10 +37,12 @@ class Simulator: # Building Simulator
             if not self.q.empty():
                 p = self.q.get()
                 print(p)
-                self.clock=self.clock+1
                 p.b=p.b-self.tq
-                if not p.b <= 0  :
+                if not p.b <= 0 :
                     self.q.put(p)
+
+            self.clock=self.clock+1
+
 
 ########### MAIN ##############
 
@@ -52,6 +56,7 @@ with open('process.csv', newline='') as csvfile:
             arrival = int(row[1])
             burst = int(row[2])
             sim.addProcess(pid,arrival,burst)
+
     print('Process List\n+=============================================+')
     for p in sim.plist:
         print(p)
